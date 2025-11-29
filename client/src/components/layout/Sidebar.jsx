@@ -1,0 +1,60 @@
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext.jsx';
+import { LayoutDashboard, PlusCircle, BookOpen, LogOut, FileBarChart } from 'lucide-react';
+import { cn } from '../../utils/cn.js';
+
+export const Sidebar = () => {
+  const { user, logout } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const teacherLinks = [
+    { path: '/teacher', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/teacher/create', icon: PlusCircle, label: 'Create Exam' },
+    { path: '/teacher/analytics', icon: FileBarChart, label: 'Analytics' },
+  ];
+
+  const studentLinks = [
+    { path: '/student', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/student/results', icon: FileBarChart, label: 'My Results' },
+  ];
+
+  const links = user?.role === 'teacher' ? teacherLinks : studentLinks;
+
+  return (
+    <aside className="w-64 bg-slate-900 text-white h-screen fixed left-0 top-0 flex flex-col">
+      <div className="p-6 border-b border-slate-800">
+        <h1 className="text-2xl font-bold text-indigo-400">ExamPro</h1>
+        <p className="text-xs text-slate-400 mt-1 capitalize">{user?.role} Portal</p>
+      </div>
+
+      <nav className="flex-1 p-4 space-y-2">
+        {links.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            className={cn(
+              "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+              location.pathname === link.path 
+                ? "bg-indigo-600 text-white" 
+                : "text-slate-400 hover:bg-slate-800 hover:text-white"
+            )}
+          >
+            <link.icon size={20} />
+            <span>{link.label}</span>
+          </Link>
+        ))}
+      </nav>
+
+      <div className="p-4 border-t border-slate-800">
+        <button 
+          onClick={() => { logout(); navigate('/login'); }}
+          className="flex items-center gap-3 px-4 py-2 w-full text-red-400 hover:bg-slate-800 rounded-lg"
+        >
+          <LogOut size={20} /> Logout
+        </button>
+      </div>
+    </aside>
+  );
+};
