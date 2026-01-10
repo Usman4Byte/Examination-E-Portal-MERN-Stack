@@ -18,6 +18,7 @@ export const Sidebar = () => {
   const studentLinks = [
     { path: '/student', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/student/results', icon: FileBarChart, label: 'My Results' },
+    { path: '/student/analytics', icon: FileBarChart, label: 'Analytics' },
   ];
 
   const links = user?.role === 'teacher' ? teacherLinks : studentLinks;
@@ -36,8 +37,8 @@ export const Sidebar = () => {
             to={link.path}
             className={cn(
               "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-              location.pathname === link.path 
-                ? "bg-indigo-600 text-white" 
+              location.pathname === link.path
+                ? "bg-indigo-600 text-white"
                 : "text-slate-400 hover:bg-slate-800 hover:text-white"
             )}
           >
@@ -48,7 +49,7 @@ export const Sidebar = () => {
       </nav>
 
       <div className="p-4 border-t border-slate-800">
-        <button 
+        <button
           onClick={() => { logout(); navigate('/login'); }}
           className="flex items-center gap-3 px-4 py-2 w-full text-red-400 hover:bg-slate-800 rounded-lg"
         >
