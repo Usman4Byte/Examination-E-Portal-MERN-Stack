@@ -1,19 +1,38 @@
-import { MOCK_USERS } from '../data/mockData.js';
+import api from './api.js';
 
-// Simulating an API call with a 500ms delay
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
+/* LOGIN */
 export const loginAPI = async (email, password) => {
-  await delay(800);
-  const user = MOCK_USERS.find(u => u.email === email && u.password === password);
-  if (!user) throw new Error('Invalid credentials');
-  
-  // In real MERN, this returns a JWT token. We mock it here.
-  return { ...user, token: 'mock-jwt-token-123' };
+  try {
+    const { data } = await api.post("/auth/login", { email, password });
+    return data;
+  } catch (error) {
+    console.error("Login Error:", error.response || error);
+    let message = "Login failed";
+    if (error.response?.data?.message) message = error.response.data.message;
+    throw new Error(message);
+  }
 };
 
+/* REGISTER */
 export const registerAPI = async (userData) => {
-  await delay(800);
-  // Real backend would save to MongoDB here
-  return { ...userData, id: Math.random().toString(), role: 'student' };
+  try {
+    const { data } = await api.post("/auth/register", userData);
+    return data;
+  } catch (error) {
+    console.error("Register Error:", error.response || error);
+    let message = "Registration failed";
+    if (error.response?.data?.message) message = error.response.data.message;
+    throw new Error(message);
+  }
+};
+
+
+export const getCurrentUser = async () => {
+  const res = await api.get("/auth/me");
+  return res.data;
+};
+
+
+export const logoutUser = () => {
+  localStorage.removeItem("token");
 };
