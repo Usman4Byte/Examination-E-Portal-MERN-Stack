@@ -7,7 +7,7 @@ const getBaseURL = () => {
     }
     // In production (Vercel), use your deployed backend URL
     if (import.meta.env.PROD) {
-        return "https://examination-e-portal-usman-backend.vercel.app/api"; // <-- Replace with your actual backend URL
+        return "https://examination-e-portal-usman-backend.vercel.app/"; // <-- Replace with your actual backend URL
     }
     // Local development
     return "http://localhost:5000/api";
