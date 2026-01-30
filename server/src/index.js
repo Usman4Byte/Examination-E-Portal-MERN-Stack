@@ -14,7 +14,13 @@ const app = express();
 
 
 /* MIDDLEWARE */
-app.use(cors());              // Allow frontend to talk to backend
+const corsOptions = {
+    origin: true,  // Allow all origins
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+};
+app.use(cors(corsOptions));
 app.use(express.json());      // Allow JSON data in requests
 
 /* DATABASE */
