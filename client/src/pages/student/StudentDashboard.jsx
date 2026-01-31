@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 export const StudentDashboard = () => {
   const [exams, setExams] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('filter');
   const [sortBy, setSortBy] = useState('sort');
@@ -14,11 +15,14 @@ export const StudentDashboard = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
+        setLoading(true);
         const res = await api.get('/student/exams');
         setExams(res.data);
       }
       catch (err) {
         console.error('Error fetching exams', err);
+      } finally {
+        setLoading(false);
       }
     }
     fetchExams();
@@ -70,7 +74,13 @@ export const StudentDashboard = () => {
     <div className="p-4 sm:p-6 lg:p-8">
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Available Exams</h1>
 
-
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-500 text-lg font-medium">Loading exams...</p>
+        </div>
+      ) : (
+        <>
       {/* Options for Searching , Filtering, Sorting etc */}
       <div className="flex flex-col sm:flex-row flex-wrap w-full justify-start gap-3 sm:gap-4 lg:gap-8 px-0 py-4 sm:py-6 lg:py-8 mb-6 sm:mb-10">
 
@@ -164,6 +174,8 @@ export const StudentDashboard = () => {
           )
         })}
       </div>
+        </>
+      )}
     </div>
   );
 };

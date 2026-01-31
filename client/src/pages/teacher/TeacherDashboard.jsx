@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 export const TeacherDashboard = () => {
   const [exams, setExams] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('filter');
   const [sortBy, setSortBy] = useState('sort');
@@ -14,10 +15,13 @@ export const TeacherDashboard = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
+        setLoading(true);
         const res = await api.get('/teacher/exams');
         setExams(res.data);
       } catch (err) {
         console.error('Error fetching exams', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchExams();
@@ -84,7 +88,13 @@ export const TeacherDashboard = () => {
         </Link>
       </div>
 
-
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-500 text-lg font-medium">Loading exams...</p>
+        </div>
+      ) : (
+        <>
       {/* Options for Searching , Filtering, Sorting etc */}
       <div className="flex flex-col sm:flex-row flex-wrap w-full justify-start gap-3 sm:gap-4 lg:gap-8 px-0 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8 mb-6 sm:mb-10">
 
@@ -154,6 +164,8 @@ export const TeacherDashboard = () => {
           </div>
         ))}
       </div>
+        </>
+      )}
     </div>
   );
 };

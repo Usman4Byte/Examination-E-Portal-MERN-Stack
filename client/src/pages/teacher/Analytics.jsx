@@ -28,17 +28,20 @@ export const Analytics = () => {
     performance: [],
     recent: []
   });
-
+  const [loading, setLoading] = useState(true);
   const [examSearch, setExamSearch] = useState('');
 
 
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
+        setLoading(true);
         const res = await api.get('/teacher/analytics');
         setAnalytics(res.data);
       } catch (err) {
         console.error('Failed to fetch analytics:', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchAnalytics();
@@ -62,6 +65,13 @@ export const Analytics = () => {
         <p className="text-gray-500 text-sm sm:text-base">Track student progress and exam difficulty.</p>
       </div>
 
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-500 text-lg font-medium">Loading analytics...</p>
+        </div>
+      ) : (
+        <>
       {/* Top Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm">
@@ -152,6 +162,8 @@ export const Analytics = () => {
           </Link>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 };

@@ -6,17 +6,30 @@ import api from '../../services/api';
 
 export const StudentDetailedAnalytics = () => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [selected, setSelected] = useState('');
     const [sortConfig, setSortConfig] = useState({ key: 'subject', direction: 'asc' });
 
     useEffect(() => {
+        setLoading(true);
         api.get('/student/analytics')
             .then(res => {
                 setData(res.data);
                 setSelected(res.data.subjects[0]?.subject);
             })
-            .catch(console.error);
+            .catch(console.error)
+            .finally(() => setLoading(false));
     }, []);
+
+    if (loading) return (
+        <div className="p-4 sm:p-6 lg:p-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Detailed Analytics</h1>
+            <div className="flex flex-col items-center justify-center py-20">
+                <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+                <p className="text-gray-500 text-lg font-medium">Loading analytics...</p>
+            </div>
+        </div>
+    );
 
     if (!data) return null;
 

@@ -3,6 +3,7 @@ import api from '../../services/api.js';
 
 export const DetailedAnalytics = () => {
     const [students, setStudents] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedStudent, setSelectedStudent] = useState(null);
 
     const [search, setSearch] = useState('');
@@ -11,10 +12,13 @@ export const DetailedAnalytics = () => {
     useEffect(() => {
         const fetchStudents = async () => {
             try {
+                setLoading(true);
                 const res = await api.get('/teacher/students-analytics');
                 setStudents(res.data.students);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLoading(false);
             }
         };
         fetchStudents();
@@ -56,6 +60,13 @@ export const DetailedAnalytics = () => {
         <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Student Analytics</h1>
 
+            {loading ? (
+                <div className="flex flex-col items-center justify-center py-20">
+                    <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-500 text-lg font-medium">Loading student data...</p>
+                </div>
+            ) : (
+                <>
             <input
                 type="text"
                 placeholder="Search student..."
@@ -140,6 +151,8 @@ export const DetailedAnalytics = () => {
                         </div>
                     ))}
                 </div>
+            )}
+                </>
             )}
         </div>
     );

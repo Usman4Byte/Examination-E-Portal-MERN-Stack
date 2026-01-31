@@ -141,13 +141,26 @@ import api from '../../services/api';
 
 export const StudentAnalytics = () => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [examSearch, setExamSearch] = useState('');
 
     useEffect(() => {
+        setLoading(true);
         api.get('/student/analytics')
             .then(res => setData(res.data))
-            .catch(console.error);
+            .catch(console.error)
+            .finally(() => setLoading(false));
     }, []);
+
+    if (loading) return (
+        <div className="p-4 sm:p-6 lg:p-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">My Learning Analytics</h1>
+            <div className="flex flex-col items-center justify-center py-20">
+                <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+                <p className="text-gray-500 text-lg font-medium">Loading analytics...</p>
+            </div>
+        </div>
+    );
 
     if (!data) return null;
 
@@ -189,7 +202,7 @@ export const StudentAnalytics = () => {
             <input
                 type="text"
                 placeholder="Search subjects..."
-                className="w-full px-4 sm:px-6 py-2 sm:py-3 border rounded-lg focus:outline-indigo-500 placeholder:text-gray-400 text-sm sm:text-base"
+                className="w-full px-4 sm:px-6 py-2 sm:py-3 border bg-white rounded-lg focus:outline-indigo-500 placeholder:text-gray-400 text-sm sm:text-base"
                 value={examSearch}
                 onChange={e => setExamSearch(e.target.value)}
             />

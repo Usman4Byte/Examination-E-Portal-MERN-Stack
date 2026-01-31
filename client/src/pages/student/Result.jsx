@@ -13,21 +13,41 @@ export const Result = () => {
   // In a real app, you would get these values from the router state or API
   // e.g., const { state } = useLocation();
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchResults = async () => {
       try {
+        setLoading(true);
         const res = await api.get('/student/results');
         setResults(res.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchResults();
   }, []);
 
-  if (results.length === 0) return <div>No results yet</div>;
+  if (loading) return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="flex flex-col items-center">
+        <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+        <p className="text-gray-500 text-lg font-medium">Loading results...</p>
+      </div>
+    </div>
+  );
+
+  if (results.length === 0) return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="text-center">
+        <p className="text-gray-500 text-lg">No results yet</p>
+        <Link to="/student" className="text-indigo-600 hover:underline mt-2 inline-block">Go to Dashboard</Link>
+      </div>
+    </div>
+  );
 
 
 
