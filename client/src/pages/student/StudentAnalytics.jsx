@@ -162,26 +162,26 @@ export const StudentAnalytics = () => {
     );
 
     return (
-        <div className="p-8 space-y-8">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-gray-900">My Learning Analytics</h1>
-                <p className="text-gray-500">Track your progress, strengths, and weak areas.</p>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">My Learning Analytics</h1>
+                <p className="text-gray-500 text-sm sm:text-base">Track your progress, strengths, and weak areas.</p>
             </div>
 
             {/* Top Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-xl border shadow-sm">
-                    <p className="text-sm text-gray-500">Overall Mastery</p>
-                    <h3 className="text-3xl font-bold text-indigo-600 mt-2">{data.mastery}%</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm">
+                    <p className="text-xs sm:text-sm text-gray-500">Overall Mastery</p>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-indigo-600 mt-2">{data.mastery}%</h3>
                 </div>
-                <div className="bg-white p-6 rounded-xl border shadow-sm">
-                    <p className="text-sm text-gray-500">Strong Subjects</p>
-                    <h3 className="text-3xl font-bold text-emerald-600 mt-2">{data.strongSubjects.length}</h3>
+                <div className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm">
+                    <p className="text-xs sm:text-sm text-gray-500">Strong Subjects</p>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-emerald-600 mt-2">{data.strongSubjects.length}</h3>
                 </div>
-                <div className="bg-white p-6 rounded-xl border shadow-sm">
-                    <p className="text-sm text-gray-500">Weak Subjects</p>
-                    <h3 className="text-3xl font-bold text-red-600 mt-2">{data.weakSubjects.length}</h3>
+                <div className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm">
+                    <p className="text-xs sm:text-sm text-gray-500">Weak Subjects</p>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-red-600 mt-2">{data.weakSubjects.length}</h3>
                 </div>
             </div>
 
@@ -189,15 +189,15 @@ export const StudentAnalytics = () => {
             <input
                 type="text"
                 placeholder="Search subjects..."
-                className="w-full px-6 py-3 border rounded-lg focus:outline-indigo-500 placeholder:text-gray-400"
+                className="w-full px-4 sm:px-6 py-2 sm:py-3 border rounded-lg focus:outline-indigo-500 placeholder:text-gray-400 text-sm sm:text-base"
                 value={examSearch}
                 onChange={e => setExamSearch(e.target.value)}
             />
 
             {/* Chart Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-xl border shadow-sm h-80">
-                    <h3 className="font-bold text-gray-900 mb-6">Average Score per Subject</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm h-64 sm:h-80">
+                    <h3 className="font-bold text-gray-900 mb-4 sm:mb-6 text-sm sm:text-base">Average Score per Subject</h3>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={filteredPerformance} margin={{ top: 0, left: -20 }}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
@@ -213,8 +213,8 @@ export const StudentAnalytics = () => {
                 </div>
 
                 {/* Weak Subjects List */}
-                <div className="bg-white p-6 rounded-xl border shadow-sm h-80 overflow-y-auto">
-                    <h3 className="font-bold text-gray-900 mb-4">Focus Areas</h3>
+                <div className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm h-64 sm:h-80 overflow-y-auto">
+                    <h3 className="font-bold text-gray-900 mb-4 text-sm sm:text-base">Focus Areas</h3>
                     {data.weakSubjects.length === 0 ? (
                         <p className="text-gray-500">No weak subjects. Keep up the great work!</p>
                     ) : (
@@ -231,15 +231,15 @@ export const StudentAnalytics = () => {
             </div>
 
             {/* Subject Details */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {data.subjects.map(s => (
-                    <div key={s.subject} className="bg-white p-6 rounded-xl border shadow-sm">
-                        <div className="flex justify-between items-center mb-2">
-                            <h3 className="font-semibold">{s.subject}</h3>
-                            <span className={s.avgScore >= 70 ? 'text-emerald-600' : 'text-red-600'}>Avg {s.avgScore}%</span>
+                    <div key={s.subject} className="bg-white p-4 sm:p-6 rounded-xl border shadow-sm">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+                            <h3 className="font-semibold text-sm sm:text-base">{s.subject}</h3>
+                            <span className={`text-sm ${s.avgScore >= 70 ? 'text-emerald-600' : 'text-red-600'}`}>Avg {s.avgScore}%</span>
                         </div>
 
-                        <div className="grid grid-cols-4 text-sm text-gray-500 mt-4 gap-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 text-xs sm:text-sm text-gray-500 mt-4 gap-3 sm:gap-4">
                             <div>
                                 <p>Best</p>
                                 <p className="font-bold">{s.bestScore}%</p>
@@ -258,7 +258,7 @@ export const StudentAnalytics = () => {
                             </div>
                         </div>
 
-                        <div className="h-40 mt-4">
+                        <div className="h-32 sm:h-40 mt-4">
                             <ResponsiveContainer width="100%" height="100%">
                                 <LineChart data={s.history.map((v, i) => ({ attempt: i + 1, score: v }))}>
                                     <XAxis dataKey="attempt" />

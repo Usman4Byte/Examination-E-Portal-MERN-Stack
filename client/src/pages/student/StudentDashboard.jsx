@@ -67,17 +67,17 @@ export const StudentDashboard = () => {
 
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Available Exams</h1>
+    <div className="p-4 sm:p-6 lg:p-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Available Exams</h1>
 
 
       {/* Options for Searching , Filtering, Sorting etc */}
-      <div className="flex w-full justify-start gap-8 px-2 py-8 mb-10 overflow-clip">
+      <div className="flex flex-col sm:flex-row flex-wrap w-full justify-start gap-3 sm:gap-4 lg:gap-8 px-0 py-4 sm:py-6 lg:py-8 mb-6 sm:mb-10">
 
         <input
           type="text"
           placeholder="Search exams..."
-          className=" px-6 py-4 border-2 rounded-lg w-80 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 placeholder:text-lg placeholder:text-neutral-600 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-64 lg:w-80 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 placeholder:text-base sm:placeholder:text-lg placeholder:text-neutral-600 hover:border-indigo-500 transition-all"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -85,7 +85,7 @@ export const StudentDashboard = () => {
 
 
         <select
-          className="px-6 py-4 border-2 rounded-lg w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
           value={categoryFilter}
           onChange={e => setCategoryFilter(e.target.value)}
         >
@@ -97,7 +97,7 @@ export const StudentDashboard = () => {
         </select>
 
         <select
-          className="px-6 py-4 border-2 rounded-lg w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
         >
@@ -107,37 +107,37 @@ export const StudentDashboard = () => {
           <option value="title">Title (A–Z)</option>
         </select>
       </div>
-      {/* Options for Searching , Filtering, Sorting etc  */}
+      {/* Options for Searching , Filtering, Sorting etc  */
 
 
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
         {filteredExams.map(exam => {
           const windowAttempts = getWindowAttempts(exam);
           const isMaxed = windowAttempts >= MAX_ATTEMPTS;
           return (
             <div key={exam._id} className="bg-white rounded-xl shadow-sm border overflow-hidden">
               <div className="h-2 bg-indigo-500"></div>
-              <div className='flex justify-between items-center px-4 py-4'>
-                <span className="px-4 py-2 bg-indigo-50 text-indigo-600 text-xs font-semibold rounded-full uppercase">
+              <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-3 sm:px-4 py-3 sm:py-4'>
+                <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-50 text-indigo-600 text-xs font-semibold rounded-full uppercase">
                   {exam.category?.name || 'General'}
                 </span>
 
 
                 {!isMaxed ?
-                  (<span className="px-4 py-2 text-green-800 bg-green-200 text-sm font-semibold rounded-full capitalize transition-all">
+                  (<span className="px-3 sm:px-4 py-1.5 sm:py-2 text-green-800 bg-green-200 text-xs sm:text-sm font-semibold rounded-full capitalize transition-all">
                     Attempts : {windowAttempts} / {MAX_ATTEMPTS}
                   </span>
                   ) :
-                  (<span className="px-4 py-2 text-red-900 bg-red-200
-                text-sm font-semibold rounded-full capitalize transition-all">
+                  (<span className="px-3 sm:px-4 py-1.5 sm:py-2 text-red-900 bg-red-200
+                text-xs sm:text-sm font-semibold rounded-full capitalize transition-all">
                     Max Attempts Reached!
                   </span>
                   )}
 
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{exam.title}</h3>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{exam.title}</h3>
 
 
                 <p className="text-gray-500 text-sm mb-4">Duration • {exam.duration} Mins</p>

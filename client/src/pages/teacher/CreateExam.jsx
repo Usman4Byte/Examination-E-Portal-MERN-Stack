@@ -110,28 +110,28 @@ export const CreateExam = () => {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">{id ? 'Edit Exam' : 'Create New Exam'}</h1>
-        <Button onClick={handlePublish} disabled={loading}>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold">{id ? 'Edit Exam' : 'Create New Exam'}</h1>
+        <Button onClick={handlePublish} disabled={loading} className="w-full sm:w-auto">
           <Save size={18} className="mr-2" /> {loading ? 'Publishing...' : 'Publish Exam'}
         </Button>
       </div>
 
-      <div className="bg-white rounded-xl border p-6 mb-6 space-y-4">
+      <div className="bg-white rounded-xl border p-4 sm:p-6 mb-6 space-y-4">
         <input
           placeholder="Exam Title"
-          className="text-2xl font-bold w-full hover:outline-2 outline-indigo-500 border rounded-2xl focus:ring-0 placeholder-gray-400 p-4 transition-all-500 cursor-pointer"
+          className="text-xl sm:text-2xl font-bold w-full hover:outline-2 outline-indigo-500 border rounded-xl sm:rounded-2xl focus:ring-0 placeholder-gray-400 p-3 sm:p-4 transition-all-500 cursor-pointer"
           value={exam.title}
           onChange={e => setExam({ ...exam, title: e.target.value })}
         />
 
 
 
-        <div className="flex items-center justify-between py-3 px-4 mt-2">
-          <div>
-            <label className="block text-m font-medium text-gray-700 mb-2">Category</label>
-            <select name="category" value={exam.category} onChange={e => setExam({ ...exam, category: e.target.value })} className="w-60 px-2 py-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none hover:outline-indigo-500  transition:500 cursor-pointer" >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-3 px-0 sm:px-4 mt-2">
+          <div className="w-full sm:w-auto">
+            <label className="block text-sm sm:text-base font-medium text-gray-700 mb-2">Category</label>
+            <select name="category" value={exam.category} onChange={e => setExam({ ...exam, category: e.target.value })} className="w-full sm:w-60 px-2 py-3 sm:py-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none hover:outline-indigo-500 transition:500 cursor-pointer" >
               <option value="">Select Category</option>
               {categories.map(cat => (
                 <option key={cat._id} value={cat._id} className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none'>
@@ -141,12 +141,12 @@ export const CreateExam = () => {
             </select>
           </div>
 
-          <div className="">
-            <label className="block text-m font-medium text-gray-700 mb-2">Duration(mins)</label>
+          <div className="w-full sm:w-auto">
+            <label className="block text-sm sm:text-base font-medium text-gray-700 mb-2">Duration(mins)</label>
             <input
               type="number"
               placeholder="Duration (mins)"
-              className="w-60 px-2 py-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 hover:outline-indigo-500 outline-none transition:500 cursor-pointer"
+              className="w-full sm:w-60 px-2 py-3 sm:py-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 hover:outline-indigo-500 outline-none transition:500 cursor-pointer"
               value={exam.duration}
               onChange={e => setExam({ ...exam, duration: parseInt(e.target.value) })}
             />
@@ -154,16 +154,16 @@ export const CreateExam = () => {
         </div>
       </div >
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {exam.questions.map((q, qIndex) => (
-          <div key={qIndex} className="bg-white rounded-xl border p-6 relative ">
-            <div className="absolute top-4 right-4 text-gray-300 font-bold text-4xl opacity-20 ">
+          <div key={qIndex} className="bg-white rounded-xl border p-4 sm:p-6 relative ">
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 text-gray-300 font-bold text-2xl sm:text-4xl opacity-20 ">
               {qIndex + 1}
             </div>
 
             <input
               placeholder="Type your question here..."
-              className="w-full p-4 bg-gray-50 rounded-lg border mb-4 font-medium border-2 hover:border-indigo-500 focus:border-indigo-500"
+              className="w-full p-3 sm:p-4 bg-gray-50 rounded-lg border mb-4 font-medium border-2 hover:border-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
               value={q.text}
               onChange={e => {
                 const newQuestions = [...exam.questions];
@@ -172,7 +172,7 @@ export const CreateExam = () => {
               }}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {q.options.map((opt, oIndex) => (
                 <div key={oIndex} className="flex items-center gap-2">
                   <input

@@ -83,29 +83,29 @@ export const ExamRoom = () => {
 
   };
 
-  if (!exam) return <div>Loading...</div>;
+  if (!exam) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 flex flex-col items-center">
+    <div className="min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-6 flex flex-col items-center">
       {/* Header */}
-      <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border flex justify-between items-center mb-6">
+      <div className="w-full max-w-4xl bg-white p-3 sm:p-4 rounded-xl shadow-sm border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
         <div>
-          <h2 className="font-bold text-lg">{exam.title}</h2>
-          <p className="text-gray-500 text-sm">Question {currentQ + 1} / {exam.questions.length}</p>
+          <h2 className="font-bold text-base sm:text-lg">{exam.title}</h2>
+          <p className="text-gray-500 text-xs sm:text-sm">Question {currentQ + 1} / {exam.questions.length}</p>
         </div>
-        <div className="flex items-center gap-2 text-indigo-600 font-mono text-xl font-bold">
-          <Timer size={24} />
+        <div className="flex items-center gap-2 text-indigo-600 font-mono text-lg sm:text-xl font-bold">
+          <Timer size={20} className="sm:w-6 sm:h-6" />
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
         </div>
       </div>
 
       {/* Question */}
-      <div className="w-full max-w-4xl bg-white p-8 rounded-xl shadow-sm border mb-8">
-        <h3 className="text-2xl font-medium text-gray-800 mb-8">
+      <div className="w-full max-w-4xl bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-sm border mb-6 sm:mb-8">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-800 mb-4 sm:mb-6 lg:mb-8">
           {exam.questions[currentQ].text}
         </h3>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4">
           {exam.questions[currentQ].options.map((opt, idx) => {
 
             const isMarked = markedOptions[currentQ] !== undefined;
@@ -123,7 +123,7 @@ export const ExamRoom = () => {
                   /*setAnswers({ ...answers, [currentQ]: idx })*/
                 }
                 disabled={isMarked}
-                className={`text-left p-4 rounded-lg border-2 transition-all ${isMarked
+                className={`text-left p-3 sm:p-4 rounded-lg border-2 transition-all text-sm sm:text-base ${isMarked
                   ? isCorrectChoice
                     ? 'border-green-500 bg-green-50'
                     : isUserChoice
@@ -134,7 +134,7 @@ export const ExamRoom = () => {
                     : 'border-gray-200 hover:border-indigo-300'
                   }`}
               >
-                <span className="mr-3">{String.fromCharCode(65 + idx)}.</span>
+                <span className="mr-2 sm:mr-3">{String.fromCharCode(65 + idx)}.</span>
                 {opt}
               </button>
             )
@@ -170,22 +170,24 @@ export const ExamRoom = () => {
       </div>
 
       {/* Controls */}
-      <div className="w-full max-w-4xl flex justify-between">
+      <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
         <Button
           variant="ghost"
           disabled={currentQ === 0}
           onClick={() => setCurrentQ(currentQ - 1)}
+          className="order-2 sm:order-1"
         >
           Previous
         </Button>
 
         {currentQ === exam.questions.length - 1 ? (
-          <Button onClick={handleSubmit} disabled={markedOptions[currentQ] === undefined} className="bg-green-600 hover:bg-green-700">
+          <Button onClick={handleSubmit} disabled={markedOptions[currentQ] === undefined} className="bg-green-600 hover:bg-green-700 order-1 sm:order-2">
             Submit Exam
           </Button>
         ) : (
           <Button onClick={() => setCurrentQ(currentQ + 1)}
             disabled={markedOptions[currentQ] === undefined || currentQ === exam.questions.length - 1}
+            className="order-1 sm:order-2"
           >
             Next Question
           </Button>

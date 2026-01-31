@@ -73,25 +73,25 @@ export const TeacherDashboard = () => {
   };
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-500 mt-1">Manage your exams and view performance</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Manage your exams and view performance</p>
         </div>
         <Link to="/teacher/create">
-          <Button>+ Create New Exam</Button>
+          <Button className="w-full sm:w-auto">+ Create New Exam</Button>
         </Link>
       </div>
 
 
       {/* Options for Searching , Filtering, Sorting etc */}
-      <div className="flex w-full justify-start gap-8 px-8 py-8 mb-10 overflow-clip">
+      <div className="flex flex-col sm:flex-row flex-wrap w-full justify-start gap-3 sm:gap-4 lg:gap-8 px-0 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8 mb-6 sm:mb-10">
 
         <input
           type="text"
           placeholder="Search exams..."
-          className=" px-6 py-4 border-2 rounded-lg w-80 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 placeholder:text-lg placeholder:text-neutral-600 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-64 lg:w-80 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 placeholder:text-base sm:placeholder:text-lg placeholder:text-neutral-600 hover:border-indigo-500 transition-all"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -99,7 +99,7 @@ export const TeacherDashboard = () => {
 
 
         <select
-          className="px-6 py-4 border-2 rounded-lg w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
           value={categoryFilter}
           onChange={e => setCategoryFilter(e.target.value)}
         >
@@ -111,7 +111,7 @@ export const TeacherDashboard = () => {
         </select>
 
         <select
-          className="px-6 py-4 border-2 rounded-lg w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
         >
@@ -121,17 +121,17 @@ export const TeacherDashboard = () => {
           <option value="title">Title (A–Z)</option>
         </select>
       </div>
-      {/* Options for Searching , Filtering, Sorting etc  */}
+      {/* Options for Searching , Filtering, Sorting etc  */
 
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
         {filteredExams.map(exam => (
-          <div key={exam._id} className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
-            <div className="flex justify-between items-start mb-4">
-              <span className="px-4 py-2 bg-indigo-50 text-indigo-600 text-xs font-semibold rounded-full uppercase">
+          <div key={exam._id} className="bg-white rounded-xl shadow-sm border p-4 sm:p-6 hover:shadow-md transition-shadow">
+            <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
+              <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-50 text-indigo-600 text-xs font-semibold rounded-full uppercase">
                 {exam.category?.name || 'General'}
               </span>
-              <span className="text-sm text-gray-400">Created by : Mr.{exam.createdBy?.name}</span>
+              <span className="text-xs sm:text-sm text-gray-400">Created by : Mr.{exam.createdBy?.name}</span>
             </div>
 
             <h3 className="text-xl font-bold text-gray-900 mb-2">{exam.title}</h3>

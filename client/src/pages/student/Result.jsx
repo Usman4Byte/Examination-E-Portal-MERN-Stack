@@ -48,40 +48,41 @@ export const Result = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-3 sm:p-4">
       <div className="bg-white max-w-lg w-full rounded-2xl shadow-xl overflow-hidden">
 
         {/* Header Section */}
-        <div className={`p-8 text-center ${latest.passed ? 'bg-emerald-50' : 'bg-red-50'}`}>
-          <div className="mx-auto w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+        <div className={`p-4 sm:p-6 lg:p-8 text-center ${latest.passed ? 'bg-emerald-50' : 'bg-red-50'}`}>
+          <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-3 sm:mb-4 shadow-sm">
             {latest.passed ? (
-              <CheckCircle size={32} className="text-emerald-500" />
+              <CheckCircle size={24} className="sm:w-8 sm:h-8 text-emerald-500" />
             ) : (
-              <XCircle size={32} className="text-red-500" />
+              <XCircle size={24} className="sm:w-8 sm:h-8 text-red-500" />
             )}
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
             {latest.passed ? 'Excellent Work!' : 'Keep Practicing'}
           </h1>
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 mt-2 text-sm sm:text-base">
             <strong>{latest.exam.title}</strong>
           </p>
         </div>
 
         {/* Score Section */}
-        <div className="p-8">
-          <div className="h-48 w-full relative mb-6">
+        <div className="p-4 sm:p-6 lg:p-8">
+          <div className="h-36 sm:h-48 w-full relative mb-4 sm:mb-6">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
+                  innerRadius={45}
+                  outerRadius={65}
                   startAngle={90}
                   endAngle={-270}
                   dataKey="value"
+                  className="sm:innerRadius-60 sm:outerRadius-80"
                 >
                   {pieData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
@@ -92,7 +93,7 @@ export const Result = () => {
             {/* Centered Text inside Pie */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               {/* <span className="text-4xl font-bold text-gray-900">{latest.score}%</span> */}
-              <span className={`text-4xl font-bold ${latest.passed ? 'text-green-600' : 'text-red-600'}`}>{latest.score}%</span>
+              <span className={`text-3xl sm:text-4xl font-bold ${latest.passed ? 'text-green-600' : 'text-red-600'}`}>{latest.score}%</span>
             </div>
           </div>
 
@@ -107,22 +108,22 @@ export const Result = () => {
               <Stat title="Incorrect" value={latest.incorrectCount} color="text-red-600" />
             </div>
           </div> */}
-          <div className="grid grid-cols-3 gap-4 mt-6">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-4 sm:mt-6">
             <Stat label="Questions" value={latest.totalQuestions} />
             <Stat label="Correct" value={latest.correctCount} color="text-green-600" />
             <Stat label="Wrong" value={latest.incorrectCount} color="text-red-600" />
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <Link to="/student" className="flex-1">
-              <Button variant="ghost" className="w-full">
-                <Home size={18} className="mr-2" /> Dashboard
+              <Button variant="ghost" className="w-full text-sm sm:text-base">
+                <Home size={16} className="mr-1 sm:mr-2 sm:w-[18px] sm:h-[18px]" /> Dashboard
               </Button>
             </Link>
             <Link to="/student" className="flex-1">
-              <Button className="w-full" onClick={() => navigate(`/student/exam/${latest.examId}`)}>
-                <RotateCcw size={18} className="mr-2" /> Take Another
+              <Button className="w-full text-sm sm:text-base" onClick={() => navigate(`/student/exam/${latest.examId}`)}>
+                <RotateCcw size={16} className="mr-1 sm:mr-2 sm:w-[18px] sm:h-[18px]" /> Take Another
               </Button>
             </Link>
           </div>
@@ -151,8 +152,8 @@ export const Result = () => {
 
 
 const Stat = ({ label, value, color = 'text-gray-900' }) => (
-  <div className="bg-gray-50 p-4 rounded-xl text-center">
+  <div className="bg-gray-50 p-2 sm:p-4 rounded-xl text-center">
     <p className="text-xs text-gray-400 uppercase">{label}</p>
-    <p className={`text-xl font-bold ${color}`}>{value}</p>
+    <p className={`text-lg sm:text-xl font-bold ${color}`}>{value}</p>
   </div>
 );
