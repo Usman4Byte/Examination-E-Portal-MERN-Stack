@@ -21,10 +21,22 @@ app.use(cors({
 }));
 app.use(express.json());
 
+/* HEALTH CHECK - Before DB connection */
+app.get("/", (req, res) => {
+    res.json({ 
+        message: "Exam Portal API is running",
+        mongoConfigured: !!process.env.MONGO_URI,
+        jwtConfigured: !!process.env.JWT_SECRET
+    });
+});
+
 /* DATABASE */
 let isConnected = false;
 const connectDB = async () => {
     if (isConnected) return;
+    if (!process.env.MONGO_URI) {
+        throw new Error("MONGO_URI environment variable is not set");
+    }
     try {
         const conn = await mongoose.connect(process.env.MONGO_URI);
         isConnected = conn.connections[0].readyState === 1;
@@ -70,11 +82,6 @@ const roleMiddleware = (roles) => (req, res, next) => {
     }
     next();
 };
-
-/* HEALTH CHECK */
-app.get("/", (req, res) => {
-    res.json({ message: "Exam Portal API is running" });
-});
 
 /* ============ AUTH ROUTES ============ */
 app.post("/api/auth/register", async (req, res) => {
