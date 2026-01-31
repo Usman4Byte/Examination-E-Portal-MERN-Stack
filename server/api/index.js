@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "../src/routes/authRoutes.js";
-import studentRoutes from "../src/routes/StudentRoutes.js";
+import studentRoutes from "../src/routes/studentRoutes.js";
 import teacherRoutes from "../src/routes/teacherRoutes.js";
 import categoryRoutes from "../src/routes/categoryRoutes.js";
 import connectDB from "../src/config/db.js";
