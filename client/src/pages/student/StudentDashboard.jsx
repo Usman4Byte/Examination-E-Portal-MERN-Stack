@@ -77,7 +77,7 @@ export const StudentDashboard = () => {
         <input
           type="text"
           placeholder="Search exams..."
-          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-64 lg:w-80 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 placeholder:text-base sm:placeholder:text-lg placeholder:text-neutral-600 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-1 rounded-lg w-full sm:w-64 lg:w-80 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 placeholder:text-base sm:placeholder:text-lg placeholder:text-neutral-600 hover:border-indigo-500 transition-all"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -85,7 +85,7 @@ export const StudentDashboard = () => {
 
 
         <select
-          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-1 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
           value={categoryFilter}
           onChange={e => setCategoryFilter(e.target.value)}
         >
@@ -97,7 +97,7 @@ export const StudentDashboard = () => {
         </select>
 
         <select
-          className="px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
+          className="px-4 sm:px-6 py-3 sm:py-4 border-1 rounded-lg w-full sm:w-48 lg:w-60 hover:shadow-lg drop-shadow-black bg-white focus:outline-indigo-500 hover:border-indigo-500 transition-all"
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
         >
