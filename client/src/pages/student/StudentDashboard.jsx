@@ -107,7 +107,7 @@ export const StudentDashboard = () => {
           <option value="title">Title (A–Z)</option>
         </select>
       </div>
-      {/* Options for Searching , Filtering, Sorting etc  */
+      /* Options for Searching , Filtering, Sorting etc  */
 
 
 
