@@ -140,6 +140,7 @@ export const ExamRoom = () => {
             )
           })}
           <Button
+            className="w-full sm:w-auto mt-2"
             onClick={() => {
               if (selectedOption === null) {
                 alert('Please select an option first');
@@ -170,24 +171,24 @@ export const ExamRoom = () => {
       </div>
 
       {/* Controls */}
-      <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
+      <div className="w-full max-w-4xl flex flex-col-reverse sm:flex-row justify-between gap-3">
         <Button
           variant="ghost"
           disabled={currentQ === 0}
           onClick={() => setCurrentQ(currentQ - 1)}
-          className="order-2 sm:order-1"
+          className="w-full sm:w-auto"
         >
           Previous
         </Button>
 
         {currentQ === exam.questions.length - 1 ? (
-          <Button onClick={handleSubmit} disabled={markedOptions[currentQ] === undefined} className="bg-green-600 hover:bg-green-700 order-1 sm:order-2">
+          <Button onClick={handleSubmit} disabled={markedOptions[currentQ] === undefined} className="bg-green-600 hover:bg-green-700 w-full sm:w-auto">
             Submit Exam
           </Button>
         ) : (
           <Button onClick={() => setCurrentQ(currentQ + 1)}
             disabled={markedOptions[currentQ] === undefined || currentQ === exam.questions.length - 1}
-            className="order-1 sm:order-2"
+            className="w-full sm:w-auto"
           >
             Next Question
           </Button>

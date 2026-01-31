@@ -140,16 +140,17 @@ export const StudentDashboard = () => {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{exam.title}</h3>
 
 
-                <p className="text-gray-500 text-sm mb-4">Duration • {exam.duration} Mins</p>
+                <p className="text-gray-500 text-xs sm:text-sm mb-4">Duration • {exam.duration} Mins</p>
 
                 {exam.locked ? (
-                  <Button disabled className="w-full bg-indigo-500 cursor-not-allowed hover:">
-                    <Lock size={18} className='mr-2' />Locked • Retry in {exam.retryAfterMinutes} min
+                  <Button disabled className="w-full bg-indigo-500 cursor-not-allowed text-xs sm:text-sm">
+                    <Lock size={16} className='mr-1 sm:mr-2 flex-shrink-0' />
+                    <span className="truncate">Locked • Retry in {exam.retryAfterMinutes}m</span>
                   </Button>
                 ) : (
                   <Link to={`/student/exam/${exam._id}`}>
-                    <Button className="w-full">
-                      <PlayCircle size={18} className="mr-2" /> Start Exam
+                    <Button className="w-full text-xs sm:text-sm">
+                      <PlayCircle size={16} className="mr-1 sm:mr-2 flex-shrink-0" /> Start Exam
                     </Button>
                   </Link>)}
 

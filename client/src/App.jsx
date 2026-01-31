@@ -17,10 +17,17 @@ import { ResultDetails } from './pages/student/ResultDetails';
 
 const ProtectedRoute = ({ children, allowedRole }) => {
     const { user, loading } = useAuth();
-    if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (loading) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="animate-pulse text-gray-500">Loading...</div></div>;
     if (!user) return <Navigate to="/login" />;
     if (allowedRole && user.role !== allowedRole) return <Navigate to="/login" />;
-    return <div className="flex min-h-screen bg-gray-50"><Sidebar /><main className="flex-1 lg:ml-64 bg-gray-200 pt-16 lg:pt-0">{children}</main></div>;
+    return (
+        <div className="flex min-h-screen bg-gray-50">
+            <Sidebar />
+            <main className="flex-1 w-full xl:ml-64 bg-gray-200 pt-14 xl:pt-0 min-h-screen">
+                {children}
+            </main>
+        </div>
+    );
 };
 
 export default function App() {

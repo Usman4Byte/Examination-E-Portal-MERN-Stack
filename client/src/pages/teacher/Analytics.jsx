@@ -121,24 +121,24 @@ export const Analytics = () => {
 
           <div className="bg-white p-4 sm:p-6 rounded-xl h-64 sm:h-80 overflow-y-scroll border shadow-sm">
             <h3 className="font-bold text-gray-900 mb-4 sm:mb-6 text-sm sm:text-base">Recent Student Submissions</h3>
-            <div className="space-y-4 mb-4">
+            <div className="space-y-3 sm:space-y-4 mb-4">
               {filteredRecent.map((activity, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
+                <div key={idx} className="flex items-center justify-between p-2 sm:p-3 hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-gray-100 gap-2">
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm sm:text-base flex-shrink-0">
                       {activity.student.charAt(0)}
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">{activity.student}</p>
-                      <p className="text-xs text-gray-500">{activity.exam}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">{activity.student}</p>
+                      <p className="text-xs text-gray-500 truncate">{activity.exam}</p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <span className={`inline-block px-2 py-1 rounded text-xs font-bold ${activity.score >= 60 ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
+                  <div className="text-right flex-shrink-0">
+                    <span className={`inline-block px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs font-bold ${activity.score >= 60 ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
                       }`}>
                       {activity.score}%
                     </span>
-                    <p className="text-xs text-gray-400 mt-1">{activity.date}</p>
+                    <p className="text-xs text-gray-400 mt-1 hidden sm:block">{activity.date}</p>
                   </div>
                 </div>
               ))}

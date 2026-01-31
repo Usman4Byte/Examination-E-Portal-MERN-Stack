@@ -134,20 +134,20 @@ export const TeacherDashboard = () => {
               <span className="text-xs sm:text-sm text-gray-400">Created by : Mr.{exam.createdBy?.name}</span>
             </div>
 
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{exam.title}</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-2">{exam.title}</h3>
 
-            <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
-              <span className="flex items-center gap-1"><Clock size={16} /> {exam.duration}m</span>
-              <span className="flex items-center gap-1"><Users size={16} /> {exam.questions.length} Qs</span>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
+              <span className="flex items-center gap-1"><Clock size={14} className="sm:w-4 sm:h-4" /> {exam.duration}m</span>
+              <span className="flex items-center gap-1"><Users size={14} className="sm:w-4 sm:h-4" /> {exam.questions.length} Qs</span>
             </div>
 
             <div className="flex gap-2 pt-4 border-t">
-              <Link to={`/teacher/edit/${exam._id}`}>
-                <Button variant="outline" className="flex-1 text-xs h-9">
-                  <Edit size={14} className="mr-1" /> Edit
+              <Link to={`/teacher/edit/${exam._id}`} className="flex-1">
+                <Button variant="outline" className="w-full text-xs sm:text-sm h-9 sm:h-10">
+                  <Edit size={14} className="mr-1 flex-shrink-0" /> <span className="truncate">Edit</span>
                 </Button>
               </Link>
-              <Button variant="ghost" className="text-red-500 hover:bg-red-50 h-9 w-9 p-0" onClick={() => handleDelete(exam._id)}>
+              <Button variant="ghost" className="text-red-500 hover:bg-red-50 h-9 sm:h-10 w-9 sm:w-10 p-0 flex-shrink-0" onClick={() => handleDelete(exam._id)}>
                 <Trash2 size={16} />
               </Button>
             </div>
