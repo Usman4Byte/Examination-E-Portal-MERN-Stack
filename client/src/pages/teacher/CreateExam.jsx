@@ -163,7 +163,7 @@ export const CreateExam = () => {
 
             <input
               placeholder="Type your question here..."
-              className="w-full p-3 sm:p-4 bg-gray-50 rounded-lg border mb-4 font-medium border-2 hover:border-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
+              className="w-full p-3 sm:p-4 bg-white rounded-lg border mb-4 font-medium hover:border-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
               value={q.text}
               onChange={e => {
                 const newQuestions = [...exam.questions];
@@ -188,7 +188,7 @@ export const CreateExam = () => {
                   />
                   <input
                     placeholder={`Option ${oIndex + 1}`}
-                    className="flex-1 p-2 border-2 rounded hover:border-indigo-500 focus:border-indigo-500"
+                    className="flex-1 p-2 border rounded bg-white hover:border-indigo-500 focus:border-indigo-500"
                     value={opt}
                     onChange={(e) => {
                       const newQuestions = [...exam.questions];
